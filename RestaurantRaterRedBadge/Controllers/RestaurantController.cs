@@ -50,7 +50,7 @@ namespace RestaurantRaterRedBadge.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Restaurant restaurant = _db.Restaurants.Find(id);
-            if(restaurant == null)
+            if (restaurant == null)
             {
                 return HttpNotFound();
             }
@@ -76,12 +76,12 @@ namespace RestaurantRaterRedBadge.Controllers
         //Return the restaurant and the view
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Restaurant restaurant = _db.Restaurants.Find(id);
-            if(restaurant == null)
+            if (restaurant == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
@@ -98,6 +98,21 @@ namespace RestaurantRaterRedBadge.Controllers
                 _db.Entry(restaurant).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            return View(restaurant);
+        }
+
+        //GET: Restaurant/Details/{id}
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = _db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
             }
             return View(restaurant);
         }
